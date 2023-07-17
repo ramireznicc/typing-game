@@ -23,11 +23,11 @@ input {
 }
 
 input:hover {
-  width: 75%;
+  border: solid 1px var(--light-color);
 }
 
 input:focus {
-  width: 100%;
+  width: 80%;
   outline: none;
   border: solid 1px var(--light-color);
   box-shadow: var(--shadow);
