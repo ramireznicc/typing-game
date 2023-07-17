@@ -2,12 +2,12 @@ import { LevelTitle } from "../index";
 
 import "./styles.css";
 
-function WordsScreen({ text, isWinner, level }) {
+function WordsScreen({ words, isWinner, level, title }) {
   return (
     <div className="screen-title-container">
       <LevelTitle title={`Level ${level}`} />
       <div className={"screen" + (isWinner ? " winner" : "")}>
-        <p className="text">{isWinner ? "You won the game!" : text}</p>
+        <p className="text">{isWinner ? title : words}</p>
       </div>
     </div>
   );

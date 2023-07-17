@@ -6,7 +6,7 @@ import "./styles.css";
 function Input({ value, onChangeText }) {
   return (
     <div className="input-container">
-      <FontAwesomeIcon className="icon" icon={faChevronRight} />
+      <FontAwesomeIcon className="icon-input" icon={faChevronRight} />
       <input value={value} type="text" onChange={onChangeText} />
     </div>
   );
