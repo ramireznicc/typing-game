@@ -13,6 +13,7 @@
   --win-color: #80ed99;
   --white: #eee;
   --black: #222;
+  --transition: all 0.3s ease-in-out;
 }
 
 body {
