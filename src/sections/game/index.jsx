@@ -1,22 +1,12 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
-import { Text, Input, Button } from "../../components";
+import { WordsScreen, Input, Button } from "../../components";
+import { wordsLevel } from "../../data/words";
 import "./styles.css";
 
-function Home() {
-  const words = useMemo(
-    () => [
-      "culo",
-      "lala",
-      "ratata",
-      "pikachu",
-      "caramelo",
-      "otorrino",
-      "doctor",
-      "asdasd",
-    ],
-    []
-  );
+function Game() {
+  const [level, setLevel] = useState(1);
+  const [words, setWords] = useState(wordsLevel.level1);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [correctWords, setCorrectWords] = useState(0);
   const [isWinner, setIsWinner] = useState(false);
@@ -41,11 +31,21 @@ function Home() {
       }
     };
 
+    const nextLevel = () => {
+      if (level === 1) {
+        setLevel(2);
+        setIsWinner(false);
+        setCurrentWordIndex(0);
+        setCorrectWords(0);
+        setWords(wordsLevel.level2);
+      }
+    };
+
     if (userInput === words[currentWordIndex]) {
       setUserInput("");
       game();
     }
-  }, [userInput, words, currentWordIndex, isWinner, correctWords]);
+  }, [userInput, words, currentWordIndex, isWinner, correctWords, level]);
 
   const restartGame = () => {
     setIsWinner(false);
@@ -54,17 +54,19 @@ function Home() {
     setUserInput("");
   };
 
-  const nextLevel = () => {
-    alert("Next Level");
-  };
-
   return (
     <div className="container">
-      <Text text={words[currentWordIndex]} isWinner={isWinner} />
-      <Input value={userInput} onChangeText={onHandleChangeText} />
-      <Button onClick={button.function}>{button.title}</Button>
+      <div className="container-margins">
+        <WordsScreen
+          text={words[currentWordIndex]}
+          isWinner={isWinner}
+          level={level}
+        />
+        <Input value={userInput} onChangeText={onHandleChangeText} />
+        <Button onClick={button.function}>{button.title}</Button>
+      </div>
     </div>
   );
 }
 
-export default Home;
+export default Game;

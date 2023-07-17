@@ -14,6 +14,7 @@
   --white: #eee;
   --black: #222;
   --transition: all 0.3s ease-in-out;
+  --shadow: 0 0 24px var(--light-color);
 }
 
 body {
