@@ -2,4 +2,19 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Share Tech Mono", monospace;
+}
+
+:root {
+  --background-color: #f2e9e4;
+  --primary-color: #4a4e69;
+  --secondary-color: #22223b;
+  --light-color: #c9ada7;
+  --win-color: #80ed99;
+  --white: #eee;
+  --black: #222;
+}
+
+body {
+  background-color: var(--background-color);
 }
