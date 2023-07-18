@@ -1,10 +1,11 @@
+import { Link } from "react-router-dom";
 import "./styles.css";
 
 function Home() {
   return (
     <div className="container">
       <h1>Home</h1>
-      <a href="/game">to the game</a>
+      <Link to="/game">Start Game</Link>
     </div>
   );
 }
