@@ -39,3 +39,9 @@ body {
   width: 40%;
   gap: 48px;
 }
+
+@media (max-width: 768px) {
+  .container-margins {
+    width: 90%;
+  }
+}
