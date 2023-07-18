@@ -6,19 +6,19 @@
 }
 
 :root {
-  --background-color: #f2e9e4;
-  --primary-color: #4a4e69;
-  --secondary-color: #22223b;
-  --light-color: #c9ada7;
-  --win-color: #80ed99;
   --white: #eee;
   --black: #222;
+  --white-transparent: rgba(255, 255, 255, 0.05);
+  --primary-color: #80ffdb;
+  --secondary-color: #cbf3f0;
+  --win-color: #80ed99;
   --transition: all 0.3s ease-in-out;
-  --shadow: 0 0 24px var(--light-color);
+  --shadow: 0 0 6px var(--secondary-color);
+  --text-shadow: 0px 0px 2px var(--black);
 }
 
 body {
-  background-color: var(--background-color);
+  background-color: var(--black);
 }
 
 .container {

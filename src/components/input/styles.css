@@ -19,16 +19,17 @@ input {
   border-radius: 24px;
   border: solid 1px var(--primary-color);
   transition: var(--transition);
-  background-color: var(--background-color);
+  background-color: var(--white-transparent);
+  color: var(--white);
 }
 
 input:hover {
-  border: solid 1px var(--light-color);
+  border: solid 1px var(--secondary-color);
 }
 
 input:focus {
   width: 80%;
   outline: none;
-  border: solid 1px var(--light-color);
+  border: solid 1px var(--secondary-color);
   box-shadow: var(--shadow);
 }

@@ -5,7 +5,7 @@
   font-size: 1.3rem;
   padding: 12px 24px;
   background-color: var(--primary-color);
-  color: var(--background-color);
+  color: var(--black);
   border: none;
   border-radius: 24px;
   transition: var(--transition);
@@ -13,19 +13,20 @@
 
 button:hover {
   background-color: var(--secondary-color);
-  color: var(--white);
   padding: 12px 48px;
+  box-shadow: var(--shadow);
+  text-shadow: var(--text-shadow);
 }
 
 button:active {
   scale: 0.9;
 }
 
-.icon-button {
-  font-size: 1rem;
-}
-
-.icon-button:hover {
+button:hover .icon-button {
   animation: rotateIn;
   animation-duration: 1s;
+}
+
+.icon-button {
+  font-size: 1rem;
 }
