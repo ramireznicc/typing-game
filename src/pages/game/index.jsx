@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 
 import { WordsScreen, Input, Button } from "../../components";
 import { wordsLevel } from "../../data/words";
-import "./styles.css";
 
 function Game() {
   const [level, setLevel] = useState(1);

@@ -24,3 +24,8 @@ button:active {
 .icon-button {
   font-size: 1rem;
 }
+
+.icon-button:hover {
+  animation: rotateIn;
+  animation-duration: 1s;
+}
