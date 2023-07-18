@@ -27,7 +27,7 @@
 .text {
   text-align: center;
   font-size: 3.4rem;
-  color: var(--background-color);
+  color: var(--black);
   text-shadow: var(--text-shadow);
 }
 
