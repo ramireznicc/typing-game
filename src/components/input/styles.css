@@ -10,7 +10,6 @@
 .icon-input {
   font-size: 1.5rem;
   color: var(--primary-color);
-  animation: headShake 2s infinite;
 }
 
 input {
