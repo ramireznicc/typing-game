@@ -1,4 +1,4 @@
-import { LevelTitle, Stopwatch, WordsLeft } from "../index";
+import { LevelTitle, Mistakes, Stopwatch, WordsLeft } from "../index";
 
 import "./styles.css";
 
@@ -10,6 +10,7 @@ function Display({
   isGameStarted,
   winMessage,
   isClockRunnig,
+  mistakes,
 }) {
   const getText = () => {
     if (!isGameStarted) {
@@ -26,11 +27,12 @@ function Display({
   return (
     <div className="screen-title-container">
       <div className="top-container">
-        <div>
+        <div className="left-container">
+          <Stopwatch isRunning={isClockRunnig} />
           <LevelTitle level={level} />
         </div>
-        <div className="clock-words-container">
-          <Stopwatch isRunning={isClockRunnig} />
+        <div className="right-container">
+          <Mistakes mistakes={mistakes} />
           <WordsLeft wordsLeft={wordsLeft} />
         </div>
       </div>

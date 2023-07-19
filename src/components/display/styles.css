@@ -14,11 +14,18 @@
   justify-content: space-between;
 }
 
-.clock-words-container {
+.left-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
+}
+
+.right-container {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 0.5rem;
+  gap: 0.4rem;
 }
 
 .screen {

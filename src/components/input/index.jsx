@@ -4,7 +4,13 @@ import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
 import "./styles.css";
 
-function Input({ value, onChangeText, isGameStarted, isLevelPassed }) {
+function Input({
+  value,
+  onChangeText,
+  onKeyPress,
+  isGameStarted,
+  isLevelPassed,
+}) {
   const inputRef = useRef(null);
 
   useEffect(() => {
@@ -22,6 +28,7 @@ function Input({ value, onChangeText, isGameStarted, isLevelPassed }) {
         onChange={onChangeText}
         disabled={isLevelPassed}
         ref={inputRef}
+        onKeyDown={onKeyPress}
       />
     </div>
   );

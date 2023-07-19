@@ -14,6 +14,7 @@ function Game() {
   const [userInput, setUserInput] = useState("");
   const wordsLeft = words.length - currentWordIndex;
   const [isClockRunnig, setIsClockRunning] = useState(false);
+  const [mistakes, setMistakes] = useState(0);
 
   const onHandleChangeText = (event) => {
     setUserInput(event.target.value);
@@ -22,6 +23,14 @@ function Game() {
   const onHandleEnterKey = () => {
     if (!isGameStarted) {
       setGameStarted(true);
+    }
+  };
+
+  const onHandleBackspaceKey = (event) => {
+    if (userInput !== "") {
+      if (event.key === "Backspace") {
+        setMistakes((prev) => prev + 1);
+      }
     }
   };
 
@@ -115,12 +124,14 @@ function Game() {
           isLevelPassed={isLevelPassed}
           isGameStarted={isGameStarted}
           isClockRunnig={isClockRunnig}
+          mistakes={mistakes}
         />
         <Input
           value={userInput}
           onChangeText={onHandleChangeText}
           isLevelPassed={isLevelPassed}
           isGameStarted={isGameStarted}
+          onKeyPress={onHandleBackspaceKey}
         />
         {getButton()}
       </div>
