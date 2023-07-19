@@ -1,14 +1,15 @@
-import { LevelTitle, WordsLeft } from "../index";
+import { LevelTitle, Stopwatch, WordsLeft } from "../index";
 
 import "./styles.css";
 
-function WordsScreen({
+function Display({
   level,
   wordsLeft,
   word,
   isLevelPassed,
   isGameStarted,
   winMessage,
+  isClockRunnig,
 }) {
   const getText = () => {
     if (!isGameStarted) {
@@ -24,9 +25,14 @@ function WordsScreen({
 
   return (
     <div className="screen-title-container">
-      <div className="level-words-container">
-        <LevelTitle level={level} />
-        <WordsLeft wordsLeft={wordsLeft} />
+      <div className="top-container">
+        <div>
+          <LevelTitle level={level} />
+        </div>
+        <div className="clock-words-container">
+          <Stopwatch isRunning={isClockRunnig} />
+          <WordsLeft wordsLeft={wordsLeft} />
+        </div>
       </div>
       <div className={"screen" + (isLevelPassed ? " winner" : "")}>
         <p className={"text " + getText().class}>{getText().text}</p>
@@ -35,4 +41,4 @@ function WordsScreen({
   );
 }
 
-export default WordsScreen;
+export default Display;

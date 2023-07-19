@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import LEVEL_DATA from "../../data/level-data.json";
-import { WordsScreen, Input, Button } from "../../components";
+import { Display, Input, Button } from "../../components";
 import "./styles.css";
 
 function Game() {
@@ -13,6 +13,7 @@ function Game() {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [userInput, setUserInput] = useState("");
   const wordsLeft = words.length - currentWordIndex;
+  const [isClockRunnig, setIsClockRunning] = useState(false);
 
   const onHandleChangeText = (event) => {
     setUserInput(event.target.value);
@@ -86,18 +87,34 @@ function Game() {
     if (isGameStarted && currentWordIndex === words.length) {
       setIsLevelPassed(true);
     }
-  }, [userInput, words, currentWordIndex, wordsLeft, isGameStarted]);
+
+    if (isGameStarted) {
+      setIsClockRunning(true);
+    }
+
+    if (isLevelPassed) {
+      setIsClockRunning(false);
+    }
+  }, [
+    userInput,
+    words,
+    currentWordIndex,
+    wordsLeft,
+    isGameStarted,
+    isLevelPassed,
+  ]);
 
   return (
     <div className="container game-animation">
       <div className="container-margins">
-        <WordsScreen
+        <Display
           word={words[currentWordIndex]}
           level={level}
           wordsLeft={wordsLeft}
           winMessage={winMessage}
           isLevelPassed={isLevelPassed}
           isGameStarted={isGameStarted}
+          isClockRunnig={isClockRunnig}
         />
         <Input
           value={userInput}

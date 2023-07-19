@@ -1,0 +1,9 @@
+.stopwatch {
+  color: var(--secondary-color);
+  font-size: 2rem;
+}
+
+.started {
+  animation: headShake 2s infinite;
+  color: var(--primary-color);
+}

@@ -7,11 +7,18 @@
   gap: 18px;
 }
 
-.level-words-container {
+.top-container {
   display: flex;
   width: 100%;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
+}
+
+.clock-words-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
 }
 
 .screen {
