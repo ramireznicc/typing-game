@@ -29,5 +29,5 @@ button:active {
 }
 
 button:hover .icon-button {
-  animation: headShake 1s infinite;
+  animation: headShake 2s;
 }
