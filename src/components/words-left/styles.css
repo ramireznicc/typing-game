@@ -1,0 +1,8 @@
+.words-left {
+  font-size: 1.4rem;
+  color: var(--secondary-color);
+}
+
+.left {
+  color: var(--primary-color);
+}

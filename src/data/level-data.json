@@ -1,0 +1,80 @@
+[
+  {
+    "value": 1,
+    "winMessage": "Awesome.",
+    "words": [
+      "cat",
+      "dog",
+      "sun",
+      "moon",
+      "book",
+      "tree",
+      "house",
+      "bird",
+      "water",
+      "apple",
+      "banana",
+      "red",
+      "blue",
+      "green",
+      "one",
+      "two",
+      "three",
+      "happy",
+      "sad",
+      "small"
+    ]
+  },
+  {
+    "value": 2,
+    "winMessage": "Wow. You're good.",
+    "words": [
+      "computer",
+      "garden",
+      "orange",
+      "river",
+      "music",
+      "hello",
+      "summer",
+      "butterfly",
+      "forest",
+      "mountain",
+      "purple",
+      "yellow",
+      "family",
+      "ocean",
+      "jump",
+      "laugh",
+      "pretty",
+      "quick",
+      "storm",
+      "travel"
+    ]
+  },
+  {
+    "value": 3,
+    "winMessage": "You won the game!",
+    "words": [
+      "chocolate",
+      "elephant",
+      "magnificent",
+      "paradox",
+      "phoenix",
+      "incredible",
+      "breathtaking",
+      "extraordinary",
+      "fascinating",
+      "jubilant",
+      "serendipity",
+      "trigonometry",
+      "unbelievable",
+      "vagabond",
+      "xylophone",
+      "zephyr",
+      "quizzical",
+      "kaleidoscope",
+      "pneumonia",
+      "gazebo"
+    ]
+  }
+]

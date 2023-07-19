@@ -3,3 +3,7 @@
   font-size: 1.6rem;
   color: var(--primary-color);
 }
+
+.level {
+  color: var(--secondary-color);
+}

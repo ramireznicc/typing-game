@@ -1,0 +1,4 @@
+.game-animation {
+  animation: flipInY;
+  animation-duration: 1s;
+}

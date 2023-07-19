@@ -7,6 +7,13 @@
   gap: 18px;
 }
 
+.level-words-container {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .screen {
   width: 100%;
   display: flex;
@@ -26,9 +33,16 @@
 
 .text {
   text-align: center;
-  font-size: 3.4rem;
   color: var(--black);
   text-shadow: var(--text-shadow);
+}
+
+.medium {
+  font-size: 2rem;
+}
+
+.large {
+  font-size: 3.4rem;
 }
 
 button {

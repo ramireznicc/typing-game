@@ -1,100 +1,111 @@
 import { useEffect, useState } from "react";
 
+import LEVEL_DATA from "../../data/level-data.json";
 import { WordsScreen, Input, Button } from "../../components";
-import { wordsLevel } from "../../data/words";
+import "./styles.css";
 
 function Game() {
   const [level, setLevel] = useState(1);
-  const [words, setWords] = useState(wordsLevel.level1);
-  const [screenTitle, setScreenTitle] = useState("Awesome.");
+  const [isLevelPassed, setIsLevelPassed] = useState(false);
+  const [isGameStarted, setGameStarted] = useState(false);
+  const [winMessage, setWinMessage] = useState("");
+  const [words, setWords] = useState([]);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
-  const [correctWords, setCorrectWords] = useState(0);
-  const [isWinner, setIsWinner] = useState(false);
-  const [isGameEnded, setGameEnded] = useState(false);
   const [userInput, setUserInput] = useState("");
-  const [button, setButton] = useState({
-    title: "Restart Game",
-    function: () => restartGame(),
-  });
+  const wordsLeft = words.length - currentWordIndex;
 
   const onHandleChangeText = (event) => {
     setUserInput(event.target.value);
   };
 
-  useEffect(() => {
-    const game = () => {
-      if (correctWords === words.length - 1) {
-        if (level === 2) {
-          setIsWinner(true);
-          setButton({ title: "Next Level", function: () => nextLevel() });
-          setScreenTitle("Wow. You are good.");
-        }
-        if (level === 3) {
-          setIsWinner(true);
-          setGameEnded(true);
-          setButton({ title: "Play Again", function: () => restartGame() });
-          setScreenTitle("You won the game.");
-        } else {
-          setIsWinner(true);
-          setButton({ title: "Next Level", function: () => nextLevel() });
-        }
-      } else {
-        setCurrentWordIndex((prev) => prev + 1);
-        setCorrectWords((prev) => prev + 1);
-      }
-    };
-
-    const nextLevel = () => {
-      if (level === 1) {
-        setLevel(2);
-        setIsWinner(false);
-        setCurrentWordIndex(0);
-        setCorrectWords(0);
-        setWords(wordsLevel.level2);
-        setButton({ title: "Restart Game", function: () => restartGame() });
-      }
-      if (level === 2) {
-        setLevel(3);
-        setIsWinner(false);
-        setCurrentWordIndex(0);
-        setCorrectWords(0);
-        setWords(wordsLevel.level3);
-        setButton({ title: "Restart Game", function: () => restartGame() });
-      }
-    };
-
-    if (userInput === words[currentWordIndex]) {
-      setUserInput("");
-      game();
+  const onHandleEnterKey = () => {
+    if (!isGameStarted) {
+      setGameStarted(true);
     }
-  }, [userInput, words, currentWordIndex, isWinner, correctWords, level]);
-
-  const restartGame = () => {
-    setIsWinner(false);
-    setCurrentWordIndex(0);
-    setCorrectWords(0);
-    setLevel(1);
-    setWords(wordsLevel.level1);
-    setUserInput("");
   };
 
+  const nextLevel = () => {
+    setGameStarted(false);
+    setIsLevelPassed(false);
+    setCurrentWordIndex(0);
+    setLevel((prev) => prev + 1);
+  };
+
+  const getButton = () => {
+    if (!isLevelPassed) {
+      return (
+        <Button icon="faRotate" onClick={() => window.location.reload()}>
+          RESTART GAME
+        </Button>
+      );
+    }
+
+    if (isLevelPassed) {
+      if (level < 3) {
+        return (
+          <Button icon="faForward" onClick={nextLevel}>
+            NEXT LEVEL
+          </Button>
+        );
+      } else {
+        return (
+          <Button icon="faPlay" onClick={() => window.location.reload()}>
+            PLAY AGAIN
+          </Button>
+        );
+      }
+    }
+  };
+
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      if (event.key === "Enter") {
+        onHandleEnterKey();
+      }
+    };
+
+    document.addEventListener("keypress", handleKeyPress);
+
+    return () => {
+      document.removeEventListener("keypress", handleKeyPress);
+    };
+  });
+
+  useEffect(() => {
+    const filteredByLevel = LEVEL_DATA.find((item) => item.value === level);
+    setWords(filteredByLevel.words);
+    setWinMessage(filteredByLevel.winMessage);
+  }, [level]);
+
+  useEffect(() => {
+    if (userInput === words[currentWordIndex]) {
+      setCurrentWordIndex((prev) => prev + 1);
+      setUserInput("");
+    }
+
+    if (isGameStarted && currentWordIndex === words.length) {
+      setIsLevelPassed(true);
+    }
+  }, [userInput, words, currentWordIndex, wordsLeft, isGameStarted]);
+
   return (
-    <div className="container">
+    <div className="container game-animation">
       <div className="container-margins">
         <WordsScreen
-          words={words[currentWordIndex]}
-          isWinner={isWinner}
+          word={words[currentWordIndex]}
           level={level}
-          title={screenTitle}
+          wordsLeft={wordsLeft}
+          winMessage={winMessage}
+          isLevelPassed={isLevelPassed}
+          isGameStarted={isGameStarted}
         />
-        <Input value={userInput} onChangeText={onHandleChangeText} />
-        <Button
-          isGameEnded={isGameEnded}
-          isWinner={isWinner}
-          onClick={button.function}
-        >
-          {button.title}
-        </Button>
+        <Input
+          value={userInput}
+          onChangeText={onHandleChangeText}
+          isLevelPassed={isLevelPassed}
+          isGameStarted={isGameStarted}
+        />
+        {getButton()}
       </div>
     </div>
   );

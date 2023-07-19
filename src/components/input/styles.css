@@ -17,18 +17,19 @@ input {
   padding: 6px 12px;
   font-size: 1.2rem;
   border-radius: var(--border-radius);
-  border: solid 1px var(--secondary-color);
+  border: solid 2px var(--primary-color);
   transition: var(--transition);
   background-color: var(--white-transparent);
   color: var(--white);
 }
 
 input:hover {
-  width: 65%;
+  border: solid 2px var(--secondary-color);
 }
 
 input:focus {
   width: 80%;
   outline: none;
   box-shadow: var(--box-shadow);
+  border: solid 2px var(--secondary-color);
 }

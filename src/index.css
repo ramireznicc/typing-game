@@ -3,6 +3,8 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Share Tech Mono", monospace;
+  text-rendering: optimizeLegibility;
+  user-select: none;
 }
 
 :root {
@@ -20,6 +22,11 @@
 
 body {
   background-color: var(--black);
+  overflow: hidden;
+}
+
+a {
+  text-decoration: none;
 }
 
 .container {

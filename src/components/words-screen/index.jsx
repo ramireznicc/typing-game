@@ -1,13 +1,35 @@
-import { LevelTitle } from "../index";
+import { LevelTitle, WordsLeft } from "../index";
 
 import "./styles.css";
 
-function WordsScreen({ words, isWinner, level, title }) {
+function WordsScreen({
+  level,
+  wordsLeft,
+  word,
+  isLevelPassed,
+  isGameStarted,
+  winMessage,
+}) {
+  const getText = () => {
+    if (!isGameStarted) {
+      return { class: "medium", text: "Press enter to start." };
+    } else {
+      if (isLevelPassed) {
+        return { class: "medium", text: winMessage };
+      } else {
+        return { class: "large", text: word };
+      }
+    }
+  };
+
   return (
     <div className="screen-title-container">
-      <LevelTitle title={`Level ${level}`} />
-      <div className={"screen" + (isWinner ? " winner" : "")}>
-        <p className="text">{isWinner ? title : words}</p>
+      <div className="level-words-container">
+        <LevelTitle level={level} />
+        <WordsLeft wordsLeft={wordsLeft} />
+      </div>
+      <div className={"screen" + (isLevelPassed ? " winner" : "")}>
+        <p className={"text " + getText().class}>{getText().text}</p>
       </div>
     </div>
   );
