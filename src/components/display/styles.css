@@ -39,6 +39,7 @@
   height: 7rem;
   box-shadow: var(--box-shadow);
   background-color: var(--secondary-color);
+  transition: all 0.2s ease-in-out;
 }
 
 .winner {
