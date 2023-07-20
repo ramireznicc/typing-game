@@ -12,25 +12,17 @@ function Game() {
   const [words, setWords] = useState([]);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [userInput, setUserInput] = useState("");
-  const wordsLeft = words.length - currentWordIndex;
   const [isClockRunnig, setIsClockRunning] = useState(false);
-  const [mistakes, setMistakes] = useState(0);
+  const [isWordWrong, setIsWordWrong] = useState(false);
+  const wordsLeft = words.length - currentWordIndex;
 
   const onHandleChangeText = (event) => {
-    setUserInput(event.target.value);
+    setUserInput(event.target.value.toLowerCase());
   };
 
   const onHandleEnterKey = () => {
     if (!isGameStarted) {
       setGameStarted(true);
-    }
-  };
-
-  const onHandleBackspaceKey = (event) => {
-    if (userInput !== "") {
-      if (event.key === "Backspace") {
-        setMistakes((prev) => prev + 1);
-      }
     }
   };
 
@@ -99,6 +91,17 @@ function Game() {
 
     if (isGameStarted) {
       setIsClockRunning(true);
+      for (let i = 0; i < userInput.length; i++) {
+        if (userInput[i] !== words[currentWordIndex][i]) {
+          setIsWordWrong(true);
+        } else {
+          setIsWordWrong(false);
+        }
+      }
+    }
+
+    if (userInput === "") {
+      setIsWordWrong(false);
     }
 
     if (isLevelPassed) {
@@ -118,20 +121,19 @@ function Game() {
       <div className="container-margins">
         <Display
           word={words[currentWordIndex]}
+          isWrong={isWordWrong}
           level={level}
           wordsLeft={wordsLeft}
           winMessage={winMessage}
           isLevelPassed={isLevelPassed}
           isGameStarted={isGameStarted}
           isClockRunnig={isClockRunnig}
-          mistakes={mistakes}
         />
         <Input
           value={userInput}
           onChangeText={onHandleChangeText}
           isLevelPassed={isLevelPassed}
           isGameStarted={isGameStarted}
-          onKeyPress={onHandleBackspaceKey}
         />
         {getButton()}
       </div>

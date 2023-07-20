@@ -43,6 +43,12 @@
 
 .winner {
   background-color: var(--win-color);
+  box-shadow: 0 0 6px var(--win-color);
+}
+
+.wrong {
+  background-color: var(--wrong-color);
+  box-shadow: 0 0 12px var(--wrong-color);
 }
 
 .text {
