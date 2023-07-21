@@ -10,7 +10,7 @@
 :root {
   --white: #eee;
   --black: #222;
-  --white-transparent: rgba(255, 255, 255, 0.05);
+  --white-transparent: rgba(255, 255, 255, 0.1);
   --primary-color: #80ffdb;
   --secondary-color: #cbf3f0;
   --win-color: #80ed99;

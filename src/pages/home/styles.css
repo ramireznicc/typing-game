@@ -1,5 +1,5 @@
 .home {
-  gap: 48px;
+  gap: 3rem;
   animation: flipInX 1.5s;
   height: 100vh;
 }
@@ -37,6 +37,15 @@
 .home-container h4 {
   font-size: 1.3rem;
   color: var(--secondary-color);
+}
+
+.bottom-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1.5rem;
+  height: fit-content;
 }
 
 @media (max-width: 768px) {

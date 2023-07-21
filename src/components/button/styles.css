@@ -12,14 +12,14 @@
   cursor: pointer;
 }
 
-button:hover {
+.button:hover {
   background-color: var(--secondary-color);
   padding: 0.8rem 2rem;
   box-shadow: var(--box-shadow);
   text-shadow: var(--text-shadow);
 }
 
-button:active {
+.button:active {
   scale: 0.9;
 }
 
@@ -28,6 +28,6 @@ button:active {
   color: var(--black);
 }
 
-button:hover .icon-button {
+.button:hover .icon-button {
   animation: headShake 2s;
 }

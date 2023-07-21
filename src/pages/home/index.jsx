@@ -1,12 +1,13 @@
 import { useState } from "react";
 
 import { Link } from "react-router-dom";
-import { Button } from "../../components/index";
+import { Button, Language } from "../../components/index";
 
 import "./styles.css";
 
 function Home() {
   const [display, setDisplay] = useState(true);
+  const [language, setLanguage] = useState("en");
   // const [isMobile, setIsMobile] = useState(false);
 
   setTimeout(() => {
@@ -15,6 +16,12 @@ function Home() {
 
   const handleSetDisplay = () => {
     setDisplay(!display);
+  };
+
+  const onHandleLanguage = (e) => {
+    if (language !== e.target.value) {
+      setLanguage(e.target.value);
+    }
   };
 
   // const isMobileDevice = () => {
@@ -38,11 +45,14 @@ function Home() {
         <h1>the Typing game</h1>
         <h4>Let's see how fast you can type.</h4>
       </div>
-      <Link to="/game">
-        <Button icon="faPlay" onClick={handleSetDisplay}>
-          Start
-        </Button>
-      </Link>
+      <div className="bottom-container">
+        <Language onClick={onHandleLanguage} language={language} />
+        <Link to="/game">
+          <Button icon="faPlay" onClick={handleSetDisplay}>
+            Start
+          </Button>
+        </Link>
+      </div>
     </div>
   );
 }
