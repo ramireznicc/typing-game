@@ -10,6 +10,7 @@
   border: none;
   transition: var(--transition);
   font-weight: bolder;
+  cursor: pointer;
 }
 
 .language-en {

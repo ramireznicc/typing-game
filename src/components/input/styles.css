@@ -33,3 +33,23 @@ input:focus {
   box-shadow: var(--box-shadow);
   border: solid 2px var(--secondary-color);
 }
+
+input.input-wrong {
+  border-color: var(--wrong-color);
+  box-shadow: 0 0 8px rgba(247, 77, 15, 0.4);
+}
+
+input.input-wrong:focus {
+  border-color: var(--wrong-color);
+  box-shadow: 0 0 12px rgba(247, 77, 15, 0.5);
+}
+
+input.input-correct {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 8px rgba(128, 255, 219, 0.3);
+}
+
+input.input-correct:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 12px rgba(128, 255, 219, 0.4);
+}

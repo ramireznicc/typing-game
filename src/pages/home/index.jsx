@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
 import { Button, Language } from "../../components/index";
@@ -10,9 +10,12 @@ function Home() {
   const [language, setLanguage] = useState("en");
   // const [isMobile, setIsMobile] = useState(false);
 
-  setTimeout(() => {
-    setDisplay(false);
-  }, 5000);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDisplay(false);
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleSetDisplay = () => {
     setDisplay(!display);

@@ -10,6 +10,7 @@ function Input({
   onKeyPress,
   isGameStarted,
   isLevelPassed,
+  isWrong,
 }) {
   const inputRef = useRef(null);
 
@@ -17,7 +18,9 @@ function Input({
     if (isGameStarted) {
       inputRef.current.focus();
     }
-  });
+  }, [isGameStarted]);
+
+  const inputClass = isWrong ? "input-wrong" : value ? "input-correct" : "";
 
   return (
     <div className="input-container">
@@ -26,9 +29,13 @@ function Input({
         value={value}
         type="text"
         onChange={onChangeText}
-        disabled={isLevelPassed}
+        disabled={!isGameStarted || isLevelPassed}
         ref={inputRef}
         onKeyDown={onKeyPress}
+        className={inputClass}
+        aria-label="Type the word shown on screen"
+        autoComplete="off"
+        spellCheck="false"
       />
     </div>
   );

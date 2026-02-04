@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import LEVEL_DATA from "../../data/level-data.json";
 import { Display, Input, Button } from "../../components";
@@ -14,22 +14,25 @@ function Game() {
   const [userInput, setUserInput] = useState("");
   const [isClockRunnig, setIsClockRunning] = useState(false);
   const [isWordWrong, setIsWordWrong] = useState(false);
-  const wordsLeft = words.length - currentWordIndex;
+  const wordsLeft = Math.max(0, words.length - currentWordIndex);
 
   const onHandleChangeText = (event) => {
     setUserInput(event.target.value.toLowerCase());
   };
 
-  const onHandleEnterKey = () => {
+  const onHandleEnterKey = useCallback(() => {
     if (!isGameStarted) {
       setGameStarted(true);
     }
-  };
+  }, [isGameStarted]);
 
   const nextLevel = () => {
     setGameStarted(false);
     setIsLevelPassed(false);
     setCurrentWordIndex(0);
+    setUserInput("");
+    setIsWordWrong(false);
+    setIsClockRunning(false);
     setLevel((prev) => prev + 1);
   };
 
@@ -60,18 +63,18 @@ function Game() {
   };
 
   useEffect(() => {
-    const handleKeyPress = (event) => {
+    const handleKeyDown = (event) => {
       if (event.key === "Enter") {
         onHandleEnterKey();
       }
     };
 
-    document.addEventListener("keypress", handleKeyPress);
+    document.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      document.removeEventListener("keypress", handleKeyPress);
+      document.removeEventListener("keydown", handleKeyDown);
     };
-  });
+  }, [onHandleEnterKey]);
 
   useEffect(() => {
     const filteredByLevel = LEVEL_DATA.find((item) => item.value === level);
@@ -80,24 +83,27 @@ function Game() {
   }, [level]);
 
   useEffect(() => {
-    if (userInput === words[currentWordIndex]) {
+    if (currentWordIndex < words.length && userInput === words[currentWordIndex]) {
       setCurrentWordIndex((prev) => prev + 1);
       setUserInput("");
+      return;
     }
 
-    if (isGameStarted && currentWordIndex === words.length) {
+    if (isGameStarted && currentWordIndex >= words.length) {
       setIsLevelPassed(true);
     }
 
-    if (isGameStarted) {
+    if (isGameStarted && currentWordIndex < words.length) {
       setIsClockRunning(true);
+      const currentWord = words[currentWordIndex];
+      let wrong = false;
       for (let i = 0; i < userInput.length; i++) {
-        if (userInput[i] !== words[currentWordIndex][i]) {
-          setIsWordWrong(true);
-        } else {
-          setIsWordWrong(false);
+        if (userInput[i] !== currentWord[i]) {
+          wrong = true;
+          break;
         }
       }
+      setIsWordWrong(wrong);
     }
 
     if (userInput === "") {
@@ -121,9 +127,12 @@ function Game() {
       <div className="container-margins">
         <Display
           word={words[currentWordIndex]}
+          userInput={userInput}
+          currentWordIndex={currentWordIndex}
           isWrong={isWordWrong}
           level={level}
           wordsLeft={wordsLeft}
+          totalWords={words.length}
           winMessage={winMessage}
           isLevelPassed={isLevelPassed}
           isGameStarted={isGameStarted}
@@ -134,6 +143,7 @@ function Game() {
           onChangeText={onHandleChangeText}
           isLevelPassed={isLevelPassed}
           isGameStarted={isGameStarted}
+          isWrong={isWordWrong}
         />
         {getButton()}
       </div>

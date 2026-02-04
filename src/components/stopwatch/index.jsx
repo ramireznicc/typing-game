@@ -2,8 +2,13 @@ import { useState, useEffect } from "react";
 
 import "./styles.css";
 
-function Stopwatch({ isRunning }) {
+function Stopwatch({ isRunning, level }) {
   const [counter, setCounter] = useState(0);
+
+  useEffect(() => {
+    setCounter(0);
+  }, [level]);
+
   useEffect(() => {
     let interval;
     if (isRunning) {

@@ -5,24 +5,46 @@ import "./styles.css";
 function Display({
   level,
   wordsLeft,
+  totalWords,
   word,
+  userInput,
+  currentWordIndex,
   isLevelPassed,
   isGameStarted,
   winMessage,
   isClockRunnig,
   isWrong,
 }) {
-  const getText = () => {
+  const renderWord = () => {
     if (!isGameStarted) {
-      return { class: "medium", text: "Press enter to start." };
-    } else {
-      if (isLevelPassed) {
-        return { class: "medium", text: winMessage };
-      } else {
-        return { class: "large", text: word };
-      }
+      return <span className="medium">Press enter to start.</span>;
     }
+
+    if (isLevelPassed) {
+      return <span className="medium">{winMessage}</span>;
+    }
+
+    if (!word) return null;
+
+    return (
+      <span className="large" key={currentWordIndex}>
+        {word.split("").map((letter, i) => {
+          let className = "letter";
+          if (i < userInput.length) {
+            className += userInput[i] === letter ? " correct" : " incorrect";
+          }
+          return (
+            <span key={i} className={className}>
+              {letter}
+            </span>
+          );
+        })}
+        <span className="cursor">|</span>
+      </span>
+    );
   };
+
+  const progress = totalWords > 0 ? (currentWordIndex / totalWords) * 100 : 0;
 
   return (
     <div className="screen-title-container">
@@ -31,7 +53,7 @@ function Display({
           <LevelTitle level={level} />
         </div>
         <div className="right-container">
-          <Stopwatch isRunning={isClockRunnig} />
+          <Stopwatch isRunning={isClockRunnig} level={level} />
           <WordsLeft wordsLeft={wordsLeft} />
         </div>
       </div>
@@ -40,8 +62,16 @@ function Display({
           "screen" + (isLevelPassed ? " winner" : isWrong ? " wrong" : "")
         }
       >
-        <p className={"text " + getText().class}>{getText().text}</p>
+        <p className="text">{renderWord()}</p>
       </div>
+      {isGameStarted && (
+        <div className="progress-bar-container">
+          <div
+            className="progress-bar-fill"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+      )}
     </div>
   );
 }
