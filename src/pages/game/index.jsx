@@ -1,10 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 import LEVEL_DATA from "../../data/level-data.json";
 import { Display, Input, Button } from "../../components";
 import "./styles.css";
 
 function Game() {
+  const [searchParams] = useSearchParams();
+  const language = searchParams.get("lang") || "en";
+
   const [level, setLevel] = useState(1);
   const [isLevelPassed, setIsLevelPassed] = useState(false);
   const [isGameStarted, setGameStarted] = useState(false);
@@ -77,10 +81,11 @@ function Game() {
   }, [onHandleEnterKey]);
 
   useEffect(() => {
-    const filteredByLevel = LEVEL_DATA.find((item) => item.value === level);
+    const languageData = LEVEL_DATA[language] || LEVEL_DATA["en"];
+    const filteredByLevel = languageData.find((item) => item.value === level);
     setWords(filteredByLevel.words);
     setWinMessage(filteredByLevel.winMessage);
-  }, [level]);
+  }, [level, language]);
 
   useEffect(() => {
     if (currentWordIndex < words.length && userInput === words[currentWordIndex]) {

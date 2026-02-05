@@ -50,7 +50,7 @@ function Home() {
       </div>
       <div className="bottom-container">
         <Language onClick={onHandleLanguage} language={language} />
-        <Link to="/game">
+        <Link to={`/game?lang=${language}`}>
           <Button icon="faPlay" onClick={handleSetDisplay}>
             Start
           </Button>
